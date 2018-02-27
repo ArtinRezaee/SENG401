@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Link Shortener - Assignment 3 - Group #6";
+}
+
+<h2 class="page-title">@ViewBag.Title.</h2>
+
+<div class="container main-container">
+    <div class="intro-para">Link Shortner is a simple tool that simplifies long URL's into short versions of it, and you can still use the short version which will be redirected to the original version.</div>
+    @using (Html.BeginForm("ShortenUrl", "Home", FormMethod.Post))
+    {
+        <label for="link">Enter URL here: </label>
+        <input type="text" id="link" name="link" />
+            <input type="submit" value="Convert" />
+    }
+
+    @if (ViewBag.InitialCall == "False")
+    {
+        <div class="result">
+            @if (ViewBag.Error == "True")
+            {
+                <p class="error-msg">@ViewBag.Message</p>
+            }
+            else
+            {
+                <p class="success-msg">Successfully converted! The short version: <a href="@ViewBag.Result">@ViewBag.Result</a></p>
+            }
+        </div>
+    }
+</div>
+
