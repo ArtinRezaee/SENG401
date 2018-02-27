@@ -1,9 +1,0 @@
-C:\Projects\SENG401\Assignment 4\Assignment 4\obj\Debug\Assignment 4.csproj.CoreCompileInputs.cache
-C:\Projects\SENG401\Assignment 4\Assignment 4\bin\ApplicationInsights.config
-C:\Projects\SENG401\Assignment 4\Assignment 4\bin\Assignment 4.dll.config
-C:\Projects\SENG401\Assignment 4\Assignment 4\bin\Assignment 4.dll
-C:\Projects\SENG401\Assignment 4\Assignment 4\bin\Assignment 4.pdb
-C:\Projects\SENG401\Assignment 4\Assignment 4\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Projects\SENG401\Assignment 4\Assignment 4\obj\Debug\Assignment 4.csprojResolveAssemblyReference.cache
-C:\Projects\SENG401\Assignment 4\Assignment 4\obj\Debug\Assignment 4.dll
-C:\Projects\SENG401\Assignment 4\Assignment 4\obj\Debug\Assignment 4.pdb
