@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -11,20 +10,20 @@ namespace Assignment4.Controllers.Api
     {
 
         [HttpPost]
-        public HttpResponseMessage Update(HttpBody rev)
+        public HttpResponseMessage Update(ReviewModel rev)
         {
             try
             {
                 bool valid = Database.getInstance().updateReview(rev);
 
                 if (valid)
-                    return new HttpResponseMessage(HttpStatusCode.OK);
+                    return Request.CreateResponse(HttpStatusCode.OK, "Review has been updated");
                 else
-                    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, "Updated failed");
             }
             catch (Exception ex)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
 
         }

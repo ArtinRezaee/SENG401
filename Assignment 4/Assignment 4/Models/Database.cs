@@ -57,43 +57,7 @@ namespace Assignment4.Models
             }
         }
 
-        public List<HttpBody> getReviews(string company)
-        {
-            List<HttpBody> list = new List<HttpBody>();
-
-            try
-            {
-                int id = Int32.Parse(company);
-                string query = "SELECT * FROM reviews WHERE company_id = " + id + ";";
-
-                if (this.openConnection())
-                {
-                    MySqlCommand command = new MySqlCommand(query, this.conn);
-                    MySqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        HttpBody tmp = new HttpBody(reader.GetInt32("review_id"), reader.GetString("review"), reader.GetString("user"), reader.GetInt32("rating"), reader.GetInt64("timestamp"), reader.GetInt32("company_id"));
-                        list.Add(tmp);
-
-                    }
-
-                    this.closeConnection();
-                    return list;
-                }
-
-                else
-                    return list;
-
-            }
-            catch (Exception err)
-            {
-                System.Diagnostics.Debug.WriteLine(err.Message);
-                return list;
-            }
-        }
-
-        public bool updateReview(HttpBody oldRev)
+        public bool updateReview(ReviewModel oldRev)
         {
             if (this.openConnection())
             {
@@ -103,7 +67,7 @@ namespace Assignment4.Models
 
                 string query = "UPDATE reviews SET ";
                 query += "user = '" + oldRev.User + "', review = '" + oldRev.Review + "', rating = " + oldRev.Rating;
-                query += ", timestamp = " + unixTime + " WHERE review_id = " + oldRev.Review_Id + ";";
+                query += ", timestamp = " + unixTime + " WHERE review_id = " + oldRev.ReviewId + ";";
 
 
                 MySqlCommand command = new MySqlCommand(query, this.conn);
@@ -150,6 +114,73 @@ namespace Assignment4.Models
             {
                 System.Diagnostics.Debug.WriteLine(err.Message);
                 return companies;
+            }
+        }
+
+        public Company getCompany(int id)
+        {
+            string query = "SELECT * FROM companies WHERE company_id=" + id + ";";
+
+            if (this.openConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, this.conn);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                Company comp = null;
+                while (reader.Read())
+                {
+                    comp = new Company(reader.GetInt32("company_id"), reader.GetString("name"), reader.GetString("description"));
+                }
+
+                this.closeConnection();
+                return comp;
+            }
+            else
+                return null;
+        }
+
+        public List<ReviewModel> getReviewForCompany(int company_id)
+        {
+            List<ReviewModel> RList = new List<ReviewModel>();
+            String query = "SELECT * from reviews where company_id=" + company_id + ";";
+
+            try
+            {
+                if (this.openConnection())
+                {
+                    MySqlCommand command = new MySqlCommand(query, this.conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ReviewModel R1 = new ReviewModel(reader.GetInt32("review_id"), reader.GetString("review"), reader.GetString("user"), reader.GetInt32("rating"), reader.GetInt64("timestamp"), reader.GetInt32("company_id"));
+                        RList.Add(R1);
+                    }
+                    this.closeConnection();
+                    return RList;
+                }
+
+                else
+                    return RList;
+
+            }
+            catch (Exception err)
+            {
+                System.Diagnostics.Debug.WriteLine(err.Message);
+                return RList;
+            }
+        }
+
+        public void addCompany(Company company)
+        {
+            System.Diagnostics.Debug.WriteLine(company.Name + company.Description);
+            string query = "INSERT INTO companies (name,description) VALUES ('" + company.Name + "', '" + company.Description + "');";
+
+            if (this.openConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, this.conn);
+                command.ExecuteNonQuery();
+                this.closeConnection();
             }
         }
     }

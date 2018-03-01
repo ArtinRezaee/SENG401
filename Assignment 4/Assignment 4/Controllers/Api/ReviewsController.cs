@@ -10,11 +10,17 @@ namespace Assignment4.Controllers.Api
 {
     public class ReviewsController : ApiController
     {
-        public System.Collections.Generic.List<ReviewModel> Get(int id)
+        public List<ReviewModel> Get(int id)
         {
-            ReviewsPersistence reviews = new ReviewsPersistence();
-            List<ReviewModel> R1 = reviews.getReviewForCompany(id);
-            return R1;
+            try
+            {
+                List<ReviewModel> R1 = Database.getInstance().getReviewForCompany(id);
+                return R1;
+            }
+            catch(Exception err)
+            {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
         }
 
 
@@ -41,12 +47,12 @@ namespace Assignment4.Controllers.Api
                     conn.Open();
                 }
 
-                cmd.ExecuteNonQuery();
-                return new HttpResponseMessage(HttpStatusCode.OK);
+                cmd.ExecuteNonQuery();                
+                return Request.CreateResponse(HttpStatusCode.OK, "Review has been added");
             }
             catch (Exception ex)
             {
-                return new HttpResponseMessage(HttpStatusCode.BadRequest);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
     }

@@ -10,38 +10,57 @@
 
 <div class="row">
     <div class="col-md-4">
-        API Commands:<br>
+
+        Get list of all companies:<br>
         GET http://35.184.242.86/api/company
-        <br><br>
+        <br><br><br>
 
 
-        API Commands:<br>
-        GET http://35.184.242.86/api/reviews/#companyid
-        <br><br>
+        Get a specific companies:<br>
+        GET http://35.184.242.86/api/company/#CompanyId
+        <br><br><br>
 
-        API Commands:<br>
+
+        Create a new company:<br>
+        POST http://35.184.242.86/api/company
+        <br>
+        Body:
+        <br>{
+        <br>&nbsp;&nbsp;Name: "company name",
+        <br>&nbsp;&nbsp;Description: "company description",
+        <br>}
+        <br><br><br>
+
+
+        Get reviews of a specfic company:<br>
+        GET http://35.184.242.86/api/reviews/#CompanyId
+        <br><br><br>
+
+
+        Save a review for a company:<br>
         POST http://35.184.242.86/api/reviews
         <br>
         Body:
         <br>{
-        <br>&nbsp;&nbsp;Review: "comment",
-        <br>&nbsp;&nbsp;User: "name",
+        <br>&nbsp;&nbsp;Review: "review",
+        <br>&nbsp;&nbsp;User: "user name",
         <br>&nbsp;&nbsp;Rating: 3,
         <br>&nbsp;&nbsp;CompanyId: 1
         <br>}
-        <br><br>
+        <br><br><br>
 
-        API Commands:<br>
+
+        Update a review for a company:<br>
         POST http://35.184.242.86/api/update
         <br>
         Body:
         <br>{
-        <br>&nbsp;&nbsp;Review_Id: 2,
+        <br>&nbsp;&nbsp;ReviewId: 2,
         <br>&nbsp;&nbsp;Review: "comment",
         <br>&nbsp;&nbsp;User: "name",
         <br>&nbsp;&nbsp;Rating: 2,
         <br>&nbsp;&nbsp;Timestamp: 1519109975,
-        <br>&nbsp;&nbsp;Company_Id: 1
+        <br>&nbsp;&nbsp;CompanyId: 1
         <br>}
 
 
