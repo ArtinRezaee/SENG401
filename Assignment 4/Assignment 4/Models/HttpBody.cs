@@ -1,19 +1,19 @@
 ﻿
 namespace Assignment4.Models
 {
-    public class Review
+    public class HttpBody
     {
-        public int Id { get; set; }
-        public string User_Review { get; set; }
+        public int Review_Id { get; set; }
+        public string Review { get; set; }
         public string User { get; set; }
         public int Rating { get; set; }
         public long Timestamp { get; set; }
         public int Company_Id { get; set; }
 
-        public Review(int i, string rev, string usr, int rat, long t, int c)
+        public HttpBody(int i, string rev, string usr, int rat, long t, int c)
         {
-            Id = i;
-            User_Review = rev;
+            Review_Id = i;
+            Review = rev;
             User = usr;
             Rating = rat;
             Timestamp = t;
@@ -23,7 +23,7 @@ namespace Assignment4.Models
         override
         public string ToString()
         {
-            string line = "Id = " + Id + ", User = " + User + ", Review = " + User_Review + ", Timestamp = " + Timestamp;
+            string line = "Id = " + Review_Id + ", User = " + User + ", Review = " + Review + ", Timestamp = " + Timestamp;
             return line;
         }
     }

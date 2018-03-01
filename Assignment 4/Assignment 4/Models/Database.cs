@@ -5,12 +5,12 @@ using MySql.Data.MySqlClient;
 
 namespace Assignment4.Models
 {
-    public class DatabaseController
+    public class Database
     {
-        private static DatabaseController instance = null;
+        private static Database instance = null;
 
         private MySqlConnection conn;
-        private DatabaseController() {
+        private Database() {
             MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
             conn_string.Server = "35.184.174.117";
             conn_string.UserID = "root";
@@ -20,10 +20,10 @@ namespace Assignment4.Models
             conn = new MySqlConnection(conn_string.ToString());
         }
 
-        public static DatabaseController getInstance()
+        public static Database getInstance()
         {
             if (instance == null)
-                return new DatabaseController();
+                return new Database();
             return instance;
         }
 
@@ -57,30 +57,9 @@ namespace Assignment4.Models
             }
         }
 
-        public string getAllCompanies()
+        public List<HttpBody> getReviews(string company)
         {
-            string query = "SELECT * FROM companies;";
-
-            if (this.openConnection())
-            {
-                MySqlCommand command = new MySqlCommand(query, this.conn);
-                MySqlDataReader reader = command.ExecuteReader();
-
-                string result = "";
-                while (reader.Read())
-                    result += reader.GetString("name") + "\n";
-
-                this.closeConnection();
-                return result;
-            }
-
-            else
-                return "Failed";
-        }
-
-        public List<Review> getReviews(string company)
-        {
-            List<Review> list = new List<Review>();
+            List<HttpBody> list = new List<HttpBody>();
 
             try
             {
@@ -94,7 +73,7 @@ namespace Assignment4.Models
 
                     while (reader.Read())
                     {
-                        Review tmp = new Review(reader.GetInt32("review_id"), reader.GetString("review"), reader.GetString("user"), reader.GetInt32("rating"), reader.GetInt64("timestamp"), reader.GetInt32("company_id"));
+                        HttpBody tmp = new HttpBody(reader.GetInt32("review_id"), reader.GetString("review"), reader.GetString("user"), reader.GetInt32("rating"), reader.GetInt64("timestamp"), reader.GetInt32("company_id"));
                         list.Add(tmp);
 
                     }
@@ -114,7 +93,7 @@ namespace Assignment4.Models
             }
         }
 
-        public bool updateReview(Review oldRev)
+        public bool updateReview(HttpBody oldRev)
         {
             if (this.openConnection())
             {
@@ -123,8 +102,8 @@ namespace Assignment4.Models
 
 
                 string query = "UPDATE reviews SET ";
-                query += "user = '" + oldRev.User + "', review = '" + oldRev.User_Review + "', rating = " + oldRev.Rating;
-                query += ", timestamp = " + unixTime + " WHERE review_id = " + oldRev.Id + ";";
+                query += "user = '" + oldRev.User + "', review = '" + oldRev.Review + "', rating = " + oldRev.Rating;
+                query += ", timestamp = " + unixTime + " WHERE review_id = " + oldRev.Review_Id + ";";
 
 
                 MySqlCommand command = new MySqlCommand(query, this.conn);
@@ -138,6 +117,40 @@ namespace Assignment4.Models
             }
             else
                 return false;
+        }
+
+        public List<Company> getAllCompanies()
+        {
+            List<Company> companies = new List<Company>();
+
+            string query = "SELECT * FROM companies;";
+            try
+            {
+
+                if (this.openConnection())
+                {
+                    MySqlCommand command = new MySqlCommand(query, this.conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        Company temp = new Company(reader.GetInt32("company_id"), reader.GetString("name"), reader.GetString("description"));
+                        companies.Add(temp);
+                    }
+
+                    this.closeConnection();
+                    return companies;
+                }
+
+                else
+                    return companies;
+
+            }
+            catch (Exception err)
+            {
+                System.Diagnostics.Debug.WriteLine(err.Message);
+                return companies;
+            }
         }
     }
 }

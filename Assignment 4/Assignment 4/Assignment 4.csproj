@@ -162,14 +162,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Api\CompanyController.cs" />
     <Compile Include="Controllers\Api\ReviewsController.cs" />
+    <Compile Include="Controllers\Api\UpdateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\DatabaseController.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyResponse.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\HttpBody.cs" />
+    <Compile Include="Models\ReviewModel.cs" />
+    <Compile Include="Models\ReviewsPersistence.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />

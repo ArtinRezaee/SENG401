@@ -24,12 +24,5 @@ namespace UpdateComments.Controllers
 
             return View();
         }
-
-        public ActionResult Select()
-        {
-            string result = DatabaseController.getInstance().getAllCompanies();
-
-            return Content(result);
-        }
     }
 }
