@@ -116,7 +116,7 @@ namespace AuthenticationService.Communication
         private void initializeRequestingEndpoint()
         {
             EndpointConfiguration config = getConfig(username);
-            //requestingEndpoint = Endpoint.Start(config).ConfigureAwait(false).GetAwaiter().GetResult();
+            requestingEndpoint = Endpoint.Start(config).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 
