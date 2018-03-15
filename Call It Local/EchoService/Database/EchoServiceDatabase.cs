@@ -3,7 +3,9 @@ using Messages.Database;
 using Messages.DataTypes;
 using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest.Echo.Requests;
+
 using MySql.Data.MySqlClient;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -22,8 +22,8 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Create Account", "CreateAccount", "Authentication")</li>
                     <li>@Html.ActionLink("Echo", "Index", "Echo")</li>
+                    <li>@Html.ActionLink("Sign Up", "CreateAccount", "Authentication")</li>
                     <li id="UsernameDisplay">@Html.ActionLink(ClientApplicationMVC.Models.Globals.getUser(), "Index", "Authentication")</li>
                     @if (ClientApplicationMVC.Models.Globals.isLoggedIn() == true)
     {
