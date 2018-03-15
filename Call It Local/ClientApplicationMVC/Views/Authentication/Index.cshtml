@@ -1,9 +1,7 @@
 ﻿<script type="text/javascript" src="~/Scripts/Authentication/AuthenticationFunctions.js"></script>
-
 @{
     ViewBag.Title = "Log in ";
 }
-
 <div class="login-page-content">
     <div class="login-form-container">
         <h3 class="login-form-title">Login</h3>
@@ -27,19 +25,10 @@
                     <input type="submit" value="Login" class="submit-login btn-primary" />
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="view-result">
-                        @ViewBag.LoginResponse
-                    </div>
-                </div>
-            </div>
         }
-
     </div>
 </div>
-@using (Html.BeginForm("CreateAccount", "Authentication", FormMethod.Post))
-{
-    <input type="submit" value="Create Account" class="btn btn-default"/>
-}
+
+<div class="error">
+    @ViewBag.LoginResponse
+</div>

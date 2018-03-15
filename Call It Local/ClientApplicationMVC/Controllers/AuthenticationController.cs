@@ -6,6 +6,7 @@ using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Authentication.Requests;
 
 using System.Web.Mvc;
+using System;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -29,13 +30,18 @@ namespace ClientApplicationMVC.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            ServiceBusConnection serviceBusConnection = new ServiceBusConnection(username);
             LogInRequest logInRequest = new LogInRequest(username, password);
-             ServiceBusResponse result =serviceBusConnection.sendLogIn(logInRequest);
-            ViewBag.LoginResponse = result.response + " " +result.result;
+            ServiceBusResponse result = ConnectionManager.sendLogIn(logInRequest);
 
-            return View("Index");
-
+            if (!result.result)
+            {
+                ViewBag.LoginResponse = "Login Failed. Please verify the username and password and try again.";
+                return View("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         public ActionResult CreateAccount()
@@ -90,7 +96,7 @@ namespace ClientApplicationMVC.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(err.Message);
                 ViewBag.Message = "Please fill out this form to sign up";
-                ViewBag.CreateAccountResponse = err.Message;
+                ViewBag.CreateAccountResponse = "Something went wrong, please verify your input and try again.";
                 return View("CreateAccount");
             }
         }
