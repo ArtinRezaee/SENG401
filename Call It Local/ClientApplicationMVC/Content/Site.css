@@ -22,3 +22,33 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+
+
+#username, #password {
+    width: 220px;
+}
+
+.submit-login {
+    margin-left: 261px;
+}
+
+.login-form-container {
+    background-color: #f7f7f7;
+    padding: 0px 20px 20px 20px;
+    text-align: left;
+    display: inline-block;
+    width: 36%;
+    border: solid 1px #808080;
+    border-radius: 5px;
+}
+
+div.login-page-content {
+    margin: 100px 0px 0px 0px;
+    text-align: center;
+}
+
+div.main-container {   
+    background: red;
+}

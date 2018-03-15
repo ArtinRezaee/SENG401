@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{78C7D0A0-F019-492A-9EA7-B97DE6A143CB}</ProjectGuid>
+    <ProjectGuid>{5C95F0FB-03AD-4071-834F-711F41578713}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>AuthenticationService</RootNamespace>
     <AssemblyName>AuthenticationService</AssemblyName>
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="NServiceBus.Callbacks, Version=2.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.Callbacks.2.0.1\lib\net452\NServiceBus.Callbacks.dll</HintPath>
     </Reference>
@@ -68,12 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
-    <Folder Include="bin\Release\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Messages.csproj">
-      <Project>{22c74e7b-8a82-4a76-aed3-1858d8b4a46f}</Project>
+      <Project>{0c5ea322-7c1e-42af-b3dd-e5577975494d}</Project>
       <Name>Messages</Name>
     </ProjectReference>
   </ItemGroup>

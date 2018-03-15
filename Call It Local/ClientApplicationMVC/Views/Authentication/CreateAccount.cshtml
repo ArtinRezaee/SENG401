@@ -1,14 +1,78 @@
-﻿<!--
-    This is the html page that opens when a user navigates
-    to the create an account page
--->
-
-<script type="text/javascript" src="~/Scripts/Authentication/AuthenticationFunctions.js"></script>
+﻿<script type="text/javascript" src="~/Scripts/Authentication/AuthenticationFunctions.js"></script>
 
 @{
-    ViewBag.Title = "CreateAccount";
+    ViewBag.Title = "Sign Up";
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="login-page-content">
+    <div class="login-form-container">
+        <h3 class="login-form-title">Sign Up</h3>
+        <p class="login-form-title">@ViewBag.Message</p>
+        @using (Html.BeginForm("SignUp", "Authentication", FormMethod.Post,
+            new { id = "signupForm", onsubmit = "return validateNewAccount()" }))
+        {
 
-<!-- The remainder of this file is to be completed by students in milestone 2 -->
+            <div class="row">
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="username">Username: </label>
+                        @Html.TextBox("username")
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        @Html.Password("password")
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        @Html.TextBox("email")
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="phone">Phone: </label>
+                        @Html.TextBox("phoone")
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="address">Address: </label>
+                        @Html.TextBox("address")
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-xl-12 col-12">
+                    <div class="form-group">
+                        <label for="type">User Type: </label>
+                        @Html.DropDownList("type", new SelectList(
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem {Text = "User", Value = "user"},
+                                new SelectListItem {Text = "Business", Value = "business"},
+                                new SelectListItem {Text = "Not Specified", Value = "notspecified"}
+                            }, "Value", "Text"), new { @class = "form-group" })
+                    </div>
+                </div>
+
+
+
+                <div class="col-12">
+                    <input type="submit" value="Sign Up" class="btn btn-primary" style="margin-left: 20px;"/>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "Authentication", FormMethod.Post))
+{
+    <input type="submit" value="Log In" class="btn btn-default"/>
+}

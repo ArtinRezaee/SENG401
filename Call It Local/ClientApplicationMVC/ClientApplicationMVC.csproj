@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5F313B8A-BC9C-4144-990B-75A5D63D04BB}</ProjectGuid>
+    <ProjectGuid>{569EEF34-D555-457E-AECE-6C45984F6D9A}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -184,16 +184,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="obj\Debug\ClientApplicationMVC.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\Authentication\AuthenticationFunctions.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="obj\Debug\build.force" />
     <Content Include="obj\Debug\ClientApplicationMVC.csproj.CoreCompileInputs.cache" />
-    <Content Include="obj\Debug\ClientApplicationMVC.csprojResolveAssemblyReference.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Echo\EchoFunctions.js" />
@@ -221,6 +218,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Authentication\CreateAccount.cshtml" />
+    <Content Include="Views\Authentication\Index.cshtml" />
+    <Content Include="Views\Echo\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -241,7 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Messages.csproj">
-      <Project>{22c74e7b-8a82-4a76-aed3-1858d8b4a46f}</Project>
+      <Project>{0c5ea322-7c1e-42af-b3dd-e5577975494d}</Project>
       <Name>Messages</Name>
     </ProjectReference>
   </ItemGroup>
@@ -261,9 +261,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>60203</DevelopmentServerPort>
+          <DevelopmentServerPort>50032</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60203/</IISUrl>
+          <IISUrl>http://localhost:50032/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
