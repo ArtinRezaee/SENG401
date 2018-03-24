@@ -12,10 +12,10 @@ namespace Assignment4.Models
         private MySqlConnection conn;
         private Database() {
             MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
-            conn_string.Server = "35.184.174.117";
+            conn_string.Server = "localhost";
             conn_string.UserID = "root";
             conn_string.Password = "1234";
-            conn_string.Database = "seng401";
+            conn_string.Database = "assignment4";
 
             conn = new MySqlConnection(conn_string.ToString());
         }

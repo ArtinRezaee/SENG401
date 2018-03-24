@@ -42,20 +42,20 @@ namespace ClientApplicationMVC.Controllers
             }
 
             ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
-            if(connection == null)
+            if (connection == null)
             {
                 return RedirectToAction("Index", "Authentication");
             }
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
 
-            CompanySearchResponse response = connection.searchCompanyByName(request);
-            if (response.result == false)
-            {
-                return RedirectToAction("Index", "Authentication");
-            }
+            //CompanySearchResponse response = connection.searchCompanyByName(request);
+            //if (response.result == false)
+            //{
+            //    return RedirectToAction("Index", "Authentication");
+            //}
 
-            ViewBag.Companylist = response.list;
+            //ViewBag.Companylist = response.list;
 
             return View("Index");
         }
@@ -85,8 +85,8 @@ namespace ClientApplicationMVC.Controllers
             ViewBag.CompanyName = id;
 
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
-            GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
-            ViewBag.CompanyInfo = infoResponse.companyInfo;
+            //GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
+            //ViewBag.CompanyInfo = infoResponse.companyInfo;
 
             return View("DisplayCompany");
         }
