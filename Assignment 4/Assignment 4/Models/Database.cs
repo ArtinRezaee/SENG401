@@ -171,9 +171,56 @@ namespace Assignment4.Models
             }
         }
 
+        public List<ReviewModel2> getReview2ForCompany(string name)
+        {
+            List<ReviewModel2> RList = new List<ReviewModel2>();
+            String query = "SELECT * from reviews2 where company_name='" + name + "';";
+
+            try
+            {
+                if (this.openConnection())
+                {
+                    MySqlCommand command = new MySqlCommand(query, this.conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        ReviewModel2 R1 = new ReviewModel2(reader.GetInt32("review_id"), reader.GetString("review"), reader.GetString("user"), reader.GetInt32("rating"), reader.GetInt64("timestamp"), reader.GetString("company_name"));
+                        RList.Add(R1);
+                    }
+                    this.closeConnection();
+                    return RList;
+                }
+
+                else
+                    return RList;
+
+            }
+            catch (Exception err)
+            {
+                System.Diagnostics.Debug.WriteLine(err.Message);
+                return RList;
+            }
+        }
+
+        public void addReview2(ReviewModel2 review)
+        {
+            int timestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string query = string.Format("INSERT INTO reviews2 (review, user, rating, timestamp, company_name) values ('{0}', '{1}', {2}, '{3}', '{4}')",
+                           review.Review, review.User, review.Rating, timestamp, review.CompanyName);
+
+            if (this.openConnection())
+            {
+                MySqlCommand command = new MySqlCommand(query, this.conn);
+                command.ExecuteNonQuery();
+                this.closeConnection();
+            }
+        }
+
+
+
         public void addCompany(Company company)
         {
-            System.Diagnostics.Debug.WriteLine(company.Name + company.Description);
             string query = "INSERT INTO companies (name,description) VALUES ('" + company.Name + "', '" + company.Description + "');";
 
             if (this.openConnection())

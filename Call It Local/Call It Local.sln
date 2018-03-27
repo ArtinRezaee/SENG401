@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EchoService", "EchoService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationService", "AuthenticationService\AuthenticationService.csproj", "{095A42D6-3C8D-4668-93B1-706ED9B67845}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyListingService", "CompanyListingService\CompanyListingService.csproj", "{E173D1EE-413E-4452-B96D-C455E556CDC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{095A42D6-3C8D-4668-93B1-706ED9B67845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{095A42D6-3C8D-4668-93B1-706ED9B67845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{095A42D6-3C8D-4668-93B1-706ED9B67845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E173D1EE-413E-4452-B96D-C455E556CDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E173D1EE-413E-4452-B96D-C455E556CDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E173D1EE-413E-4452-B96D-C455E556CDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E173D1EE-413E-4452-B96D-C455E556CDC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
