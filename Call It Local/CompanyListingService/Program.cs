@@ -55,7 +55,6 @@ namespace CompanyListingService
             var routing = transport.Routing();
 
             routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
-            routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);
