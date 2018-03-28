@@ -1,15 +1,14 @@
-﻿<!--
-    This page will be used to search for and display Company names
--->
+﻿<script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions2.js"></script>
+
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Search for companies by name</h2>
 
-@using (Html.BeginForm("Search", "CompanyListings"))
+@using (Html.BeginForm("Search", "CompanyListings", FormMethod.Post,
+        new { id = "searchForm", onsubmit = "return validateSearchForm()" }))
 {
-    <p>@ViewBag.Message</p>
     <br />
 
     @Html.TextBox("textCompanyName")
@@ -20,17 +19,22 @@
 }
 @if (ViewBag.Companylist != null)
 {
-    if (ViewBag.Companylist.companyNames.Length == 0)
-    {
-        <p>Your search did not retrun any results. Please try again.</p>
-    }
-    else
+    if (!ViewBag.Index)
     {
         <p style="font-size:larger">Results:</p> <br />
-        foreach (string item in ViewBag.Companylist.companyNames)
-        {
-            @Html.ActionLink(item, "DisplayCompany", "CompanyListings", new { id = item}, null);
-            <br />
-        }
+    }
+    if (ViewBag.Index)
+    {
+        <p style="font-size:larger">List of all companies:</p> <br />
+    }
+
+    foreach (string item in ViewBag.Companylist)
+    {
+        @Html.ActionLink(item, "DisplayCompany", "CompanyListings", new { id = item }, null);
+        <br />
     }
 }
+
+<div class="error">
+    @ViewBag.SearchResponse
+</div>

@@ -227,10 +227,10 @@ namespace ClientApplicationMVC.Models
 			return false;
 		}
 
-        public ServiceBusResponse searchCompanyByName(CompanySearchRequest request)
+        public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
         {
             send(request);
-            return readUntilEOF();
+            return (CompanySearchResponse) readUntilEOF();
         }
 
 		public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest req)

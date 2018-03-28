@@ -25,6 +25,20 @@ namespace ClientApplicationMVC.Controllers
             if (Globals.isLoggedIn())
             {
                 ViewBag.Companylist = null;
+                ViewBag.Index = true;
+
+                ServiceBusConnection connection = ConnectionManager.getConnectionObject(Globals.getUser());
+                if (connection == null)
+                {
+                    return RedirectToAction("Index", "Authentication");
+                }
+
+                CompanySearchRequest request = new CompanySearchRequest("");
+                CompanySearchResponse response = connection.searchCompanyByName(request);
+
+                if (response.result)
+                    ViewBag.Companylist = response.list.companyNames;
+
                 return View("Index");
             }
             return RedirectToAction("Index", "Authentication");
@@ -36,7 +50,7 @@ namespace ClientApplicationMVC.Controllers
         /// <returns>A view to be sent to the client</returns>
         public ActionResult Search(string textCompanyName)
         {
-
+            ViewBag.Index = false;
             if (Globals.isLoggedIn() == false)
             {
                 return RedirectToAction("Index", "Authentication");
@@ -49,20 +63,12 @@ namespace ClientApplicationMVC.Controllers
             }
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
-            ServiceBusResponse response = connection.searchCompanyByName(request);
+            CompanySearchResponse response = connection.searchCompanyByName(request);
 
-            string[] companyNames = response.response.Split(',');
-            CompanyList companyList = new CompanyList();
-            companyList.companyNames = companyNames;
-
-            ViewBag.Companylist = companyList;
-
-            //if (response.result == false)
-            //{
-            //    return RedirectToAction("Index", "Authentication");
-            //}
-
-            //ViewBag.Companylist = response.list;
+            if (!response.result)
+                ViewBag.SearchResponse = response.response;
+            else
+                ViewBag.Companylist = response.list.companyNames;
 
             return View("Index");
         }

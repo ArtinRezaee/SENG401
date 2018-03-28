@@ -88,6 +88,8 @@ namespace CompanyListingService.Database
 
         public CompanySearchResponse searchCompany(string companyName)
         {
+            Console.WriteLine("Searching for " + companyName);
+
             CompanyList companyList = new CompanyList();
             List<string> companyNamesResult = new List<string>();
 
@@ -104,16 +106,20 @@ namespace CompanyListingService.Database
                 }
 
                 closeConnection();
+                companyList.companyNames = companyNamesResult.ToArray();
+
+                for (int i = 0; i < companyNamesResult.Count; i++)
+                    Console.WriteLine(companyNamesResult[i]);
+
+                if(companyNamesResult.Count == 0)
+                    return new CompanySearchResponse(false, "No companies found matching '" + companyName + "'", null);
+                else
+                    return new CompanySearchResponse(true, "Companies found", companyList);
             }
             else
             {
-                Debug.consoleMsg("Unable to connect to database");
-            }
-
-            // query the db and get the list and fill up companyList
-            companyList.companyNames = companyNamesResult.ToArray();
-
-            return new CompanySearchResponse(true, "Found", companyList);
+                throw new Exception("Unable to connect to database");
+            }            
         }
     }
 

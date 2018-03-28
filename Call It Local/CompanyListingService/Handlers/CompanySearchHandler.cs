@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using CompanyListingService.Database;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest;
+using System;
+using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 
 namespace CompanyListingService.Handlers
 {
@@ -24,10 +26,14 @@ namespace CompanyListingService.Handlers
 
         public Task Handle(CompanySearchRequest message, IMessageHandlerContext context)
         {
-            var result = CompanyListingDatabase.getInstance().searchCompany(message.searchDeliminator);
-
-            //The context is used to give a reply back to the endpoint that sent the request
-            return context.Reply(new ServiceBusResponse(true, string.Join(",", result.list.companyNames)));
+            try
+            {
+                return context.Reply(CompanyListingDatabase.getInstance().searchCompany(message.searchDeliminator));
+            }
+            catch(Exception err)
+            {
+                return context.Reply(new CompanySearchResponse(false, err.Message, null));
+            }
         }
     }
 }
