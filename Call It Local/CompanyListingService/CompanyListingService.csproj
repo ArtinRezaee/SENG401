@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
     <Reference Include="NServiceBus.Core, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.6.4.3\lib\net452\NServiceBus.Core.dll</HintPath>
     </Reference>
@@ -49,6 +50,10 @@
   <ItemGroup>
     <Compile Include="Database\CompanyListingDatabase.cs" />
     <Compile Include="Handlers\AccountCreatedHandler.cs" />
+    <Compile Include="Handlers\CompanySearchHandler.cs" />
+    <Compile Include="Handlers\GetCompanyInfoHandler.cs" />
+    <Compile Include="Handlers\GetReviewsHandler.cs" />
+    <Compile Include="Handlers\SaveReviewHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,6 +6,7 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 
 using System;
 using System.Web.Mvc;
+using Messages.ServiceBusRequest;
 using System.Web.Routing;
 
 namespace ClientApplicationMVC.Controllers
@@ -48,8 +49,14 @@ namespace ClientApplicationMVC.Controllers
             }
 
             CompanySearchRequest request = new CompanySearchRequest(textCompanyName);
+            ServiceBusResponse response = connection.searchCompanyByName(request);
 
-            //CompanySearchResponse response = connection.searchCompanyByName(request);
+            string[] companyNames = response.response.Split(',');
+            CompanyList companyList = new CompanyList();
+            companyList.companyNames = companyNames;
+
+            ViewBag.Companylist = companyList;
+
             //if (response.result == false)
             //{
             //    return RedirectToAction("Index", "Authentication");
@@ -67,11 +74,11 @@ namespace ClientApplicationMVC.Controllers
         /// <returns>A view to be sent to the client</returns>
         public ActionResult DisplayCompany(string id)
         {
-            if (Globals.isLoggedIn() == false)
+            if(Globals.isLoggedIn() == false)
             {
                 return RedirectToAction("Index", "Authentication");
             }
-            if ("".Equals(id))
+            if(String.IsNullOrWhiteSpace(id))
             {
                 return View("Index");
             }
@@ -84,11 +91,51 @@ namespace ClientApplicationMVC.Controllers
 
             ViewBag.CompanyName = id;
 
+
             GetCompanyInfoRequest infoRequest = new GetCompanyInfoRequest(new CompanyInstance(id));
             GetCompanyInfoResponse infoResponse = connection.getCompanyInfo(infoRequest);
             ViewBag.CompanyInfo = infoResponse.companyInfo;
 
+            if (infoResponse.result)
+            {
+                GetCompanyReviewsRequest request = new GetCompanyReviewsRequest(id);
+                GetCompanyReviewsResponse result = connection.getReviews(request);
+                ViewBag.Reviews = result;
+            }
+            else
+                return View("Index");
+           
+
             return View("DisplayCompany");
+        }
+
+        public ActionResult SaveReview(string name, string comment)
+        {
+            string cameFrom = Request.UrlReferrer.ToString();
+            
+            if(cameFrom.Split('/').Length == 6 && !String.IsNullOrWhiteSpace(cameFrom.Split('/')[5]))
+            {
+                SaveReviewRequest req = new SaveReviewRequest(new ReviewModel
+                {
+                    Review = comment,
+                    User = name,
+                    CompanyName = cameFrom.Split('/')[5],
+                    Rating = 0
+                });
+
+                ServiceBusResponse res = ConnectionManager.getConnectionObject(Globals.getUser()).sendReview(req);
+                if(res.result)
+                    return RedirectToAction("DisplayCompany", new { id = cameFrom.Split('/')[5] });
+                else
+                {
+                    ViewBag.SaveReviewResponse = res.response;
+                    return RedirectToAction("DisplayCompany", new { id = cameFrom.Split('/')[5] });
+                }
+            }
+            else
+            {
+                return View("Index");
+            }            
         }
     }
 }

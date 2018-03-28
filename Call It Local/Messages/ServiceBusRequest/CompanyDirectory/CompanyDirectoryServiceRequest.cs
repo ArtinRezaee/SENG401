@@ -17,5 +17,5 @@ namespace Messages.ServiceBusRequest.CompanyDirectory
         public CompanyDirectoryRequest requestType;
     }
 
-    public enum CompanyDirectoryRequest { CompanySearch, GetCompanyInfo };
+    public enum CompanyDirectoryRequest { CompanySearch, GetCompanyInfo, GetCompanyReviews, SaveReview };
 }

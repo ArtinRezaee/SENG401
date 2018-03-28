@@ -14,7 +14,7 @@ namespace CompanyListingService
     class Program
     {
         /// <summary>
-        /// Start point for the Echo Service
+        /// Start point for the Company Listing Service
         /// </summary>
         static void Main(string[] args)
         {
@@ -27,10 +27,10 @@ namespace CompanyListingService
         /// <returns>Nothing.</returns>
         static async Task AsyncMain()
         {
-            Console.Title = "Echo";
+            Console.Title = "Company";
 
-            //Create a new Endpoint configuration with the name "Echo"
-            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("Echo");
+            //Create a new Endpoint configuration with the name "CompanyListing"
+            EndpointConfiguration endpointConfiguration = new EndpointConfiguration("Company");
 
             //These two lines prevemt the endpoint configuration from scanning the MySql dll. 
             //This is done because it speeds up the startup time, and it prevents a rare but 
@@ -54,9 +54,8 @@ namespace CompanyListingService
             //This variable is used to configure how messages are routed. Using this, you may set the default reciever of a particular command, and/or subscribe to any number of events
             var routing = transport.Routing();
 
-            //Register to the AsIsEcho event published by the Authentication endpoint
             routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
-
+            routing.RegisterPublisher(typeof(AccountCreated), "Authentication");
 
             //Start the endpoint with the configuration defined above. It should be noted that any changes made to the endpointConfiguration after an endpoint is instantiated will not apply to any endpoints that have already been instantiated
             var endpointInstance = await Endpoint.Start(endpointConfiguration).ConfigureAwait(false);

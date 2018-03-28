@@ -1,21 +1,86 @@
 ﻿<link href="~/Content/ChatStyles.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions.js"></script>
+<script type="text/javascript" src="~/Scripts/CompanyListings/CompanyListingsFunctions2.js"></script>
+
+@using Messages.DataTypes.Database.CompanyDirectory;
+
 
 <h2 id="CompanyNameDisplay">@ViewBag.CompanyName</h2>
-
 <br />
 <p>Email: @ViewBag.CompanyInfo.email</p>
-<br />
 <p>Phone Number: @ViewBag.CompanyInfo.phoneNumber</p>
-<br />
 <p>@ViewBag.CompanyName can be found at these locations:</p>
-<br />
 @foreach (string location in ViewBag.CompanyInfo.locations)
 {
-    <p style="padding-left:4em;">@location</p>
+    <p style="padding-left:2em;">@location</p>
     <br />
 }
+
+@if (ViewBag.Reviews.result)
+{
+    <p>Customer Reviews: </p>
+    foreach (ReviewModel review in ViewBag.Reviews.reviews)
+    {
+        <div style=" word-wrap: break-word;
+                    background-color: #fff;
+                    background-clip: border-box;
+                    border: 1px solid rgba(0,0,0,.125);
+                    border-radius: .25rem;">
+            <div style=" -webkit-box-flex: 1;
+                    -ms-flex: 1 1 auto;
+                    flex: 1 1 auto;
+                    padding: 1.25rem;">
+                <h6 class="card-subtitle mb-2 text-muted">Reviewed by: @review.User</h6>
+                <p class="card-text">@review.Review</p>
+            </div>
+        </div>
+    }
+
+}
+
+@if (!ViewBag.Reviews.result)
+{
+    <p style="color: red">Error: @ViewBag.Reviews.response</p>
+
+}
+
+<div style="word-wrap: break-word;
+                    background-color: #fff;
+                    background-clip: border-box;
+                    border: 1px solid rgba(0,0,0,.125);
+                    border-radius: .25rem;
+                        -webkit-box-flex: 1;
+                    -ms-flex: 1 1 auto;
+                    flex: 1 1 auto;
+                    padding: 1.25rem;
+                    margin-top: 16px;
+                    margin-bottom: 25px;">
+    @using (Html.BeginForm("SaveReview", "CompanyListings", FormMethod.Post,
+        new { id = "reviewForm", onsubmit = "return validateReviewForm()" }))
+    {
+        <div class="row">
+            <div class="col-lg-12 col-xl-12 col-12">
+                <div class="form-group">
+                    <label for="name">Name: </label>
+                    @Html.TextBox("name")
+                </div>
+            </div>
+            <div class="col-lg-12 col-xl-12 col-12">
+                <div class="form-group">
+                    <label for="comment">Comment: </label>
+                    @Html.TextBox("comment")
+                </div>
+            </div>
+            <div class="col-12">
+                <input type="submit" value="Submit Review" class="submit-login btn-primary" />
+            </div>
+        </div>
+    }
+    <div class="error">
+        @ViewBag.SaveReviewResponse
+    </div>
+</div>
 
 <div style="height:100px">
     <h4>Start a conversation with @ViewBag.CompanyName</h4>
@@ -27,3 +92,4 @@
     </div>
 </div>
 <br /><br />
+

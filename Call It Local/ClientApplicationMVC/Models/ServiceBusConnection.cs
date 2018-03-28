@@ -1,6 +1,4 @@
-﻿using Messages.NServiceBus.Commands;
-using Messages.DataTypes;
-using Messages.ServiceBusRequest;
+﻿using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Authentication.Requests;
 using Messages.ServiceBusRequest.Echo.Requests;
 
@@ -10,18 +8,16 @@ using System.Net.Sockets;
 using System.Net.Security;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
-using Messages.DataTypes.Database.CompanyDirectory;
 
 namespace ClientApplicationMVC.Models
 {
-	/// <summary>
-	/// This class is responsible for sending and receiving messages between the service bus and the web server in a secure manner.
-	/// </summary>
-	public partial class ServiceBusConnection
+    /// <summary>
+    /// This class is responsible for sending and receiving messages between the service bus and the web server in a secure manner.
+    /// </summary>
+    public partial class ServiceBusConnection
 	{
 		public ServiceBusConnection(string username)
 		{
@@ -231,13 +227,29 @@ namespace ClientApplicationMVC.Models
 			return false;
 		}
 
-        public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest req)
+        public ServiceBusResponse searchCompanyByName(CompanySearchRequest request)
         {
-            string[] items = { "Item1", "Item2", "Item3", "Item4" };
-        
-            CompanyInstance comp = new CompanyInstance("company name", "phone", "email", items);
-            return new GetCompanyInfoResponse(true, "hello", comp);
+            send(request);
+            return readUntilEOF();
         }
+
+		public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest req)
+		{
+			send(req);
+			return (GetCompanyInfoResponse) readUntilEOF();
+		}
+
+		public GetCompanyReviewsResponse getReviews(GetCompanyReviewsRequest req)
+		{
+			send(req);
+			return (GetCompanyReviewsResponse) readUntilEOF();
+		}
+
+		public ServiceBusResponse sendReview(SaveReviewRequest req)
+		{
+			send(req);
+			return readUntilEOF();
+		}
 
 		#endregion ConnectionFunctions
 	}

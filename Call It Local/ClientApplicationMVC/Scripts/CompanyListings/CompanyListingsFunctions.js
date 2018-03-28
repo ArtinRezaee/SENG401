@@ -34,3 +34,12 @@ function validateAndSendMessage() {
         }
     });
 }
+
+
+function validateReviewForm() {
+    if (reviewForm.comment.value && reviewForm.name.value) {
+        return true;
+    } else {
+        return false;
+    }
+};

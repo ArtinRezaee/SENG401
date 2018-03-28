@@ -1,17 +1,12 @@
 ﻿using Messages;
 using Messages.Database;
-using Messages.DataTypes;
 using Messages.DataTypes.Database.CompanyDirectory;
-using Messages.NServiceBus.Events;
-using Messages.ServiceBusRequest.Echo.Requests;
+using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 
 using MySql.Data.MySqlClient;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CompanyListingService.Database
 {
@@ -56,18 +51,69 @@ namespace CompanyListingService.Database
             }
             else
             {
-                Debug.consoleMsg("Unable to connect to database");
+                throw new Exception("Unable to connect to database.");
             }
         }
 
         /// <summary>
-        /// Saves the reverse echo to the database
+        /// Gets the company info
         /// </summary>
         /// <param name="echo">Information about the echo</param>
-        public void getCompany()
+        public CompanyInstance getCompany(CompanyInstance company)
         {
 
-            
+            if(openConnection() == true)
+            {
+                string query = "SELECT * FROM companylisting WHERE companyname = '" + company.companyName + "';";
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                CompanyInstance c = null;
+                while (reader.Read())
+                {
+                    String[] list = new String[1];
+                    list[0] = reader.GetString("locations");
+
+                   c = new CompanyInstance(reader.GetString("companyname"), reader.GetString("phonenumber"), reader.GetString("email"), list);
+                }
+
+                closeConnection();  
+                return c;
+            }
+            else
+            {
+                throw new Exception("Unable to connect to database.");
+            }
+        }
+
+        public CompanySearchResponse searchCompany(string companyName)
+        {
+            CompanyList companyList = new CompanyList();
+            List<string> companyNamesResult = new List<string>();
+
+            if (openConnection() == true)
+            {
+                string query = $@"SELECT * FROM companylistingdb.companylisting where companyname like '%{companyName}%';";
+
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    companyNamesResult.Add(reader.GetString("companyname"));
+                }
+
+                closeConnection();
+            }
+            else
+            {
+                Debug.consoleMsg("Unable to connect to database");
+            }
+
+            // query the db and get the list and fill up companyList
+            companyList.companyNames = companyNamesResult.ToArray();
+
+            return new CompanySearchResponse(true, "Found", companyList);
         }
     }
 
