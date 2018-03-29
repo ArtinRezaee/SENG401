@@ -115,7 +115,7 @@ namespace ClientApplicationMVC.Controllers
             return View("DisplayCompany");
         }
 
-        public ActionResult SaveReview(string name, string comment)
+        public ActionResult SaveReview(string comment)
         {
             string cameFrom = Request.UrlReferrer.ToString();
             
@@ -124,10 +124,12 @@ namespace ClientApplicationMVC.Controllers
                 SaveReviewRequest req = new SaveReviewRequest(new ReviewModel
                 {
                     Review = comment,
-                    User = name,
+                    User = Globals.getUser(),
                     CompanyName = cameFrom.Split('/')[5],
                     Rating = 0
                 });
+
+                System.Diagnostics.Debug.WriteLine(comment);
 
                 ServiceBusResponse res = ConnectionManager.getConnectionObject(Globals.getUser()).sendReview(req);
                 if(res.result)

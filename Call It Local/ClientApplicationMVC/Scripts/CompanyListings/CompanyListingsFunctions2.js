@@ -1,5 +1,5 @@
 ﻿function validateReviewForm() {
-    if (reviewForm.comment.value && reviewForm.name.value) {
+    if (reviewForm.comment.value) {
         return true;
     } else {
         $('.error').html("Invalid input. Please verify your input and try again.");
