@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+    <p>Assign task to: </p>
+    <mat-form-field>
+      <!-- ngModel automatically sends the input to the data.assignee so that it can be used later -->
+      <input matInput [(ngModel)]="data.assignee">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <!-- [mat-dialog-close] allows us to tell the code to return data.assignee back as a result of the closing function -->
+    <button mat-button [mat-dialog-close]="data.assignee" cdkFocusInitial>Submit</button>
+</div>
+  
