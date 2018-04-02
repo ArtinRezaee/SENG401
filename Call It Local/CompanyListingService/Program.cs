@@ -14,7 +14,7 @@ namespace CompanyListingService
     class Program
     {
         /// <summary>
-        /// Start point for the Company Listing Service
+        /// Start point for the Company Service
         /// </summary>
         static void Main(string[] args)
         {
@@ -22,7 +22,7 @@ namespace CompanyListingService
         }
 
         /// <summary>
-        /// This method is responsible for initializing the echo endpoint used to receive events and commands
+        /// This method is responsible for initializing the company endpoint used to receive events and commands
         /// </summary>
         /// <returns>Nothing.</returns>
         static async Task AsyncMain()

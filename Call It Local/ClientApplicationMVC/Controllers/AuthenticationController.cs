@@ -50,7 +50,6 @@ namespace ClientApplicationMVC.Controllers
             return View("CreateAccount");
         }
 
-
         public ActionResult SignUp(string username, string email, string address, string phone, string password, string type)
         {
             AccountType accType;
@@ -94,7 +93,6 @@ namespace ClientApplicationMVC.Controllers
             }
             catch (Exception err)
             {
-                System.Diagnostics.Debug.WriteLine(err.Message);
                 ViewBag.Message = "Please fill out this form to sign up";
                 ViewBag.CreateAccountResponse = "Something went wrong, please verify your input and try again.";
                 return View("CreateAccount");

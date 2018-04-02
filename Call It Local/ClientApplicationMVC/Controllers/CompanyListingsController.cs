@@ -7,7 +7,6 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using System;
 using System.Web.Mvc;
 using Messages.ServiceBusRequest;
-using System.Web.Routing;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -128,8 +127,6 @@ namespace ClientApplicationMVC.Controllers
                     CompanyName = cameFrom.Split('/')[5],
                     Rating = 0
                 });
-
-                System.Diagnostics.Debug.WriteLine(comment);
 
                 ServiceBusResponse res = ConnectionManager.getConnectionObject(Globals.getUser()).sendReview(req);
                 if(res.result)

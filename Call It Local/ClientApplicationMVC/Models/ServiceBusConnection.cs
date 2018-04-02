@@ -14,10 +14,10 @@ using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 
 namespace ClientApplicationMVC.Models
 {
-    /// <summary>
-    /// This class is responsible for sending and receiving messages between the service bus and the web server in a secure manner.
-    /// </summary>
-    public partial class ServiceBusConnection
+	/// <summary>
+	/// This class is responsible for sending and receiving messages between the service bus and the web server in a secure manner.
+	/// </summary>
+	public partial class ServiceBusConnection
 	{
 		public ServiceBusConnection(string username)
 		{
@@ -27,7 +27,6 @@ namespace ClientApplicationMVC.Models
 		#region ServiceBusMessages
 
 		#region AuthenticationServiceMessages
-
 
 		/// <summary>
 		/// Sends the login information to the bus and attempts to log in
@@ -58,7 +57,6 @@ namespace ClientApplicationMVC.Models
 	   
 		#region EchoServiceMessages
 
-
 		/// <summary>
 		/// Sends the data to be echo'd to the service bus
 		/// </summary>
@@ -83,7 +81,38 @@ namespace ClientApplicationMVC.Models
 
 		#endregion EchoServiceMessages
 
+
+		#region CompanyListingServiceMessages
+
+		public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
+		{
+			send(request);
+			return (CompanySearchResponse) readUntilEOF();
+		}
+
+		public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest req)
+		{
+			send(req);
+			return (GetCompanyInfoResponse) readUntilEOF();
+		}
+
+		public GetCompanyReviewsResponse getReviews(GetCompanyReviewsRequest req)
+		{
+			send(req);
+			return (GetCompanyReviewsResponse) readUntilEOF();
+		}
+
+		public ServiceBusResponse sendReview(SaveReviewRequest req)
+		{
+			send(req);
+			return readUntilEOF();
+		}
+
+		#endregion CompanyListingServiceMessages
+
+
 		#endregion ServiceBusMessages
+
 
 		#region ConnectionFunctions
 
@@ -225,30 +254,6 @@ namespace ClientApplicationMVC.Models
 				return true;
 
 			return false;
-		}
-
-        public CompanySearchResponse searchCompanyByName(CompanySearchRequest request)
-        {
-            send(request);
-            return (CompanySearchResponse) readUntilEOF();
-        }
-
-		public GetCompanyInfoResponse getCompanyInfo(GetCompanyInfoRequest req)
-		{
-			send(req);
-			return (GetCompanyInfoResponse) readUntilEOF();
-		}
-
-		public GetCompanyReviewsResponse getReviews(GetCompanyReviewsRequest req)
-		{
-			send(req);
-			return (GetCompanyReviewsResponse) readUntilEOF();
-		}
-
-		public ServiceBusResponse sendReview(SaveReviewRequest req)
-		{
-			send(req);
-			return readUntilEOF();
 		}
 
 		#endregion ConnectionFunctions
