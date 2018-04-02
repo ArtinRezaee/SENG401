@@ -8,9 +8,6 @@ using Messages.ServiceBusRequest.Authentication;
 using Messages.ServiceBusRequest.Authentication.Requests;
 
 using NServiceBus;
-
-using System;
-using System.Collections.Generic;
 using System.Net;
 
 namespace AuthenticationService.Communication

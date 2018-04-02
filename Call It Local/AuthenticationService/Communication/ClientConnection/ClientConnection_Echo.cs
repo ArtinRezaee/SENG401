@@ -1,16 +1,9 @@
-﻿using Messages.NServiceBus.Commands;
-using Messages.NServiceBus.Events;
+﻿using Messages.NServiceBus.Events;
 using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.Echo;
 using Messages.ServiceBusRequest.Echo.Requests;
 
 using NServiceBus;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AuthenticationService.Communication
 {

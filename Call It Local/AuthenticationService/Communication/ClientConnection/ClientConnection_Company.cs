@@ -1,5 +1,4 @@
-﻿using Messages.NServiceBus.Events;
-using Messages.ServiceBusRequest;
+﻿using Messages.ServiceBusRequest;
 using Messages.ServiceBusRequest.CompanyDirectory;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
@@ -22,25 +21,23 @@ namespace AuthenticationService.Communication
         {
             switch (request.requestType)
             {
-                    case (CompanyDirectoryRequest.CompanySearch):
-                        return searchCompany((CompanySearchRequest) request);
-                    case (CompanyDirectoryRequest.GetCompanyInfo):
-                        return getCompanyInfo((GetCompanyInfoRequest) request);
-                    case (CompanyDirectoryRequest.GetCompanyReviews):
-                        return getReviews((GetCompanyReviewsRequest) request);
-                    case (CompanyDirectoryRequest.SaveReview):
-                        return sendReview((SaveReviewRequest) request);
-                    default:
-                        return new ServiceBusResponse(false, "Error: Invalid Request. Request received was: " + request.requestType.ToString());
+                case (CompanyDirectoryRequest.CompanySearch):
+                    return searchCompany((CompanySearchRequest) request);
+                case (CompanyDirectoryRequest.GetCompanyInfo):
+                    return getCompanyInfo((GetCompanyInfoRequest) request);
+                case (CompanyDirectoryRequest.GetCompanyReviews):
+                    return getReviews((GetCompanyReviewsRequest) request);
+                case (CompanyDirectoryRequest.SaveReview):
+                    return sendReview((SaveReviewRequest) request);
+                default:
+                    return new ServiceBusResponse(false, "Error: Invalid Request. Request received was: " + request.requestType.ToString());
             }
         }
 
         private ServiceBusResponse searchCompany(CompanySearchRequest request)
         {
             if (authenticated == false)
-            {
-                return new ServiceBusResponse(false, "Error: You must be logged in to use the echo reverse functionality.");
-            }
+                return new CompanySearchResponse(false, "Error: You must be logged in to use the echo reverse functionality.", null);
 
             SendOptions sendOptions = new SendOptions();
             sendOptions.SetDestination("Company");

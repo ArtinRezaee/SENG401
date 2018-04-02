@@ -1,16 +1,17 @@
-﻿using Messages.ServiceBusRequest;
-using Messages.ServiceBusRequest.Authentication.Requests;
-using Messages.ServiceBusRequest.Echo.Requests;
-
-using System;
+﻿using System;
 using System.IO;
 using System.Net.Sockets;
 using System.Net.Security;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Messages.ServiceBusRequest;
+using Messages.ServiceBusRequest.Authentication.Requests;
+using Messages.ServiceBusRequest.Echo.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
+using Messages.ServiceBusRequest.Chat.Responses;
+using Messages.ServiceBusRequest.Chat.Requests;
 
 namespace ClientApplicationMVC.Models
 {
@@ -109,6 +110,29 @@ namespace ClientApplicationMVC.Models
 		}
 
 		#endregion CompanyListingServiceMessages
+
+
+		#region ChatServiceMessages
+
+		public GetChatContactsResponse getAllChatContacts(GetChatContactsRequest request)
+		{
+			send(request);
+			return readUntilEOF() as GetChatContactsResponse;
+		}
+
+		public GetChatHistoryResponse getChatHistory(GetChatHistoryRequest request)
+		{
+			send(request);
+			return readUntilEOF() as GetChatHistoryResponse;
+		}
+
+		public ServiceBusResponse sendChatMessage(SendMessageRequest request)
+		{
+			send(request);
+			return readUntilEOF();
+		}
+
+		#endregion ChatServiceMessages
 
 
 		#endregion ServiceBusMessages
