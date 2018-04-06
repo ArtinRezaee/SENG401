@@ -14,6 +14,7 @@
       <tr *ngFor="let task of tasks">
         <!-- Display the card in the coloum which has the header similar to the status of the card-->
         <td *ngIf="task.status == tile.text">
+
           <mat-card>
             <mat-card-content style="text-align:center">
               {{task.text}} <br>
@@ -27,6 +28,7 @@
               <button mat-button *ngIf="task.status == 'Todo'" (click)="openDialog(task)">Assign</button>
             </mat-card-actions>
           </mat-card>
+          
         </td>
       </tr>
     </table>

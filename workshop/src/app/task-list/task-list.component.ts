@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import {task} from './taskInterface'
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Task } from './taskInterface';
 
 @Component({
   selector: 'app-task-list',
@@ -8,7 +8,6 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent {
-
   // Needed to create the three coloumns
   tiles = [
     {text: 'Todo', cols: 4, rows: 5, color: 'lightblue'},
@@ -17,7 +16,7 @@ export class TaskListComponent {
   ];
 
   // Prepopulated array of tasks to get rendered in the Todo coloumn
-  tasks: task[] = [
+  tasks: Task[] = [
     {id: 0, status:"Todo", cols: 4, rows: 1, text: "Finish Milestone 1", assignee:""},
     {id: 1, status:"Todo", cols: 4, rows: 1, text: "Finish Milestone 2", assignee:""},
     {id: 2, status:"Todo", cols: 4, rows: 1, text: "Finish Milestone 3", assignee:""},
@@ -26,7 +25,7 @@ export class TaskListComponent {
     {id: 5, status:"Todo", cols: 4, rows: 1, text: "Finish Milestone 6", assignee:""},
   ]
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   // Updates the task's status that is passed in based on the action that is specified
   updateTask(task, action): void{
@@ -50,11 +49,18 @@ export class TaskListComponent {
       if(result && result.replace(/\s/g, '').length)
         this.updateTask(task,'assign');
     });
-  }
-
-  
-
+  }  
 }
+
+
+
+
+
+
+
+
+
+
 
 // The component used for creating the dialog for assigning tasks
 @Component({
@@ -72,5 +78,4 @@ export class TaskDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

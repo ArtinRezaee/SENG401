@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { MatGridListModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule} from '@angular/material'
 import { AppComponent } from './app.component';
 import { TaskListComponent, TaskDialogComponent} from './task-list/task-list.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: TaskListComponent },
