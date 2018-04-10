@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyListingService", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatService", "ChatService\ChatService.csproj", "{1ECBEB86-AA03-4306-8882-74E931BD0C90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherService", "WeatherApiHandler\WeatherService.csproj", "{DFA626F3-E5FB-4302-ADB2-522BD9CB7656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{1ECBEB86-AA03-4306-8882-74E931BD0C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1ECBEB86-AA03-4306-8882-74E931BD0C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1ECBEB86-AA03-4306-8882-74E931BD0C90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFA626F3-E5FB-4302-ADB2-522BD9CB7656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFA626F3-E5FB-4302-ADB2-522BD9CB7656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFA626F3-E5FB-4302-ADB2-522BD9CB7656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFA626F3-E5FB-4302-ADB2-522BD9CB7656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

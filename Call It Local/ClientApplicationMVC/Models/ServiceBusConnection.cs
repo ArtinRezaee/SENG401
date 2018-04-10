@@ -12,6 +12,8 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using Messages.ServiceBusRequest.CompanyDirectory.Responses;
 using Messages.ServiceBusRequest.Chat.Responses;
 using Messages.ServiceBusRequest.Chat.Requests;
+using Messages.ServiceBusRequest.Weather.Responses;
+using Messages.ServiceBusRequest.Weather;
 
 namespace ClientApplicationMVC.Models
 {
@@ -97,7 +99,13 @@ namespace ClientApplicationMVC.Models
 			return (GetCompanyInfoResponse) readUntilEOF();
 		}
 
-		public GetCompanyReviewsResponse getReviews(GetCompanyReviewsRequest req)
+        public WeatherResponse getWeather(WeatherRequest req)
+        {
+            send(req);
+            return (WeatherResponse)readUntilEOF();
+        }
+
+        public GetCompanyReviewsResponse getReviews(GetCompanyReviewsRequest req)
 		{
 			send(req);
 			return (GetCompanyReviewsResponse) readUntilEOF();

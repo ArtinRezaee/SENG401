@@ -7,6 +7,8 @@ using Messages.ServiceBusRequest.CompanyDirectory.Requests;
 using System;
 using System.Web.Mvc;
 using Messages.ServiceBusRequest;
+using Messages.ServiceBusRequest.Weather;
+using Messages.ServiceBusRequest.Weather.Responses;
 
 namespace ClientApplicationMVC.Controllers
 {
@@ -109,7 +111,18 @@ namespace ClientApplicationMVC.Controllers
             }
             else
                 return View("Index");
-           
+
+            WeatherRequest weatherRequest = new WeatherRequest("Calgary");
+            WeatherResponse weatherResponse = connection.getWeather(weatherRequest);
+
+            if (weatherResponse.result)
+            {
+                ViewBag.WeatherResponse = weatherResponse.response;
+            }
+            else
+            {
+                ViewBag.WeatherResponse = "Not Found";
+            }
 
             return View("DisplayCompany");
         }
