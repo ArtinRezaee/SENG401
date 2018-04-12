@@ -112,17 +112,9 @@ namespace ClientApplicationMVC.Controllers
             else
                 return View("Index");
 
-            WeatherRequest weatherRequest = new WeatherRequest("Calgary");
+            WeatherRequest weatherRequest = new WeatherRequest(infoResponse.companyInfo.locations[0]);
             WeatherResponse weatherResponse = connection.getWeather(weatherRequest);
-
-            if (weatherResponse.result)
-            {
-                ViewBag.WeatherResponse = weatherResponse.response;
-            }
-            else
-            {
-                ViewBag.WeatherResponse = "Not Found";
-            }
+            ViewBag.WeatherResponse = weatherResponse;
 
             return View("DisplayCompany");
         }

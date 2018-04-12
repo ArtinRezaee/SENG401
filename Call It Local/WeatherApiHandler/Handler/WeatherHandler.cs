@@ -1,5 +1,4 @@
-﻿using Messages.ServiceBusRequest;
-using NServiceBus;
+﻿using NServiceBus;
 using NServiceBus.Logging;
 using System;
 using System.Threading.Tasks;
@@ -7,12 +6,14 @@ using Messages.ServiceBusRequest.Weather;
 using Messages.ServiceBusRequest.Weather.Responses;
 using System.Net;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace ChatService.Handlers
 {
     class WeatherHandler : IHandleMessages<WeatherRequest>
     {
+        //apikey1 = XdbGqPfM7qNFQXAMHjjboxc0wAZ8nSpE
+        //apikey 2 = ZRgSeGNhuWa3oDkyVqRVhdb9j21PO8UG
+
         static ILog log = LogManager.GetLogger<WeatherRequest>();
 
         public string GetApiResponse(string url,string type,string cityName="") {
@@ -61,11 +62,10 @@ namespace ChatService.Handlers
         {
             try
             {
-                // call the Accuweather API and get the response
-               var cityCode = GetApiResponse($"http://dataservice.accuweather.com/locations/v1/cities/search?q={message.Location}&apikey=XdbGqPfM7qNFQXAMHjjboxc0wAZ8nSpE","C");
-               var weatherCondition = GetApiResponse($"http://dataservice.accuweather.com/currentconditions/v1/{cityCode}?&details=true&apikey=XdbGqPfM7qNFQXAMHjjboxc0wAZ8nSpE","W",message.Location);
+               var cityCode = GetApiResponse($"http://dataservice.accuweather.com/locations/v1/cities/search?q={message.Location}&apikey=ZRgSeGNhuWa3oDkyVqRVhdb9j21PO8UG","C");
+               var weatherCondition = GetApiResponse($"http://dataservice.accuweather.com/currentconditions/v1/{cityCode}?&details=true&apikey=ZRgSeGNhuWa3oDkyVqRVhdb9j21PO8UG","W",message.Location);
 
-                return context.Reply(new WeatherResponse(true, weatherCondition));
+               return context.Reply(new WeatherResponse(true, weatherCondition));
             }
             catch (Exception err)
             {
