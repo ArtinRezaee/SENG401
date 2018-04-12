@@ -57,3 +57,21 @@ div.error {
     color: red;
     margin: 20px;
 }
+
+div.city-name {
+    color: #0094ff;
+    font-weight: bold;
+}
+
+div.temp-text {
+    color: #ff6a00;
+    font-weight: bold;
+}
+
+div.temp-value {
+    font-size: 25px;
+}
+
+div.real-feel {
+    color: #888;
+}
