@@ -11,7 +11,7 @@ namespace CompanyListingService.Handlers
 {
     public class SaveReviewHandler : IHandleMessages<SaveReviewRequest>
     {
-        private static readonly string URL = "http://35.226.176.140/api/reviews2";
+        private static readonly string URL = "http://35.192.92.48/api/reviews2";
 
         static ILog log = LogManager.GetLogger<SaveReviewRequest>();
 
